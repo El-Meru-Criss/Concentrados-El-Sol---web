@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+
+:root{
+    --negro: #000000;
+    --amarillo: #FFC300;
+    --degradado:linear-gradient(90deg, var(var(--amarillo)),var(var(--negro)));
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    /* text-transform: capitalize; */
+}
+
+*::selection{
+    background: var(--amarillo);
+    color: white;
+}
+
+html{
+    font-size: 70%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+body{
+    background: #f9f9f9;
+}
+
+header{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header .logo{
+    font-size: 2rem;
+    color: var(--negro);
+}
+header .logo span{
+    color: var(--amarillo);
+}
+header .navbar a{
+    font-size: 1.8rem;
+    margin-left: 2rem;
+    color: var(--negro);
+}
+header .navbar a:hover{
+    color: var(--amarillo);
+}
+header .navbar #sesion{
+    margin-left: 2rem;
+}
+header input{
+    display: none;
+}
+header label{
+    font-size: 3rem;
+    color: var(--negro);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+}
+
+@media(max-witdth:1200px){
+    html{
+        font-size:  55%;
+    }
+}
+
+@media(max-width: 885px){
+    header label{
+        visibility: visible;
+        opacity: 1;
+    }
+
+    header .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 1rem 2rem;
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    header .navbar a{
+        display: block;
+        margin: 2rem 0;
+        font-size: 2rem;
+    }
+
+    header .navbar #sesion{
+        margin: 2rem 0;
+    }
+    
+    header input:checked ~ .navbar{
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    header input:checked ~ label::before{
+        content: '\f00d';
+    }
+}
+
+@media(max-width:450px){
+    html{
+        font-size: 49%;
+    }
+}
+
+.tablas{
+    display:block;
+    /* align-items:initial;*/
+    justify-content: center;
+   /* min-height: 100vh;*/
+    padding: 0 9%;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+}
+
+.tabla-deudores{
+    margin: 1rem;
+    padding: 1rem 1rem;
+    width: 100%;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);    
+}
+
+.tabla-deudores thead tr{
+    background-color: var(--amarillo);
+     color: var(--negro);
+     text-align: left;
+     font-weight: bold;
+}
+.tabla-deudores tfoot tr{
+    background-color: var(--amarillo);
+    color: var(--negro);
+    text-align: left;
+    font-weight: bold;
+}
+.tabla-deudores th,
+.tabla-deudores td{
+    padding: 12px 15px;
+}
+.tabla-deudores tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+.tabla-deudores tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.tabla-deudores tbody tr:last-of-type{
+    border-bottom: 2px solid var(--amarillo);
+}
+.tabla-deudores tbody tr.active-row{
+    font-weight: bold;
+    color: var(--amarillo);
+
+}
+.envioeliminar{
+    background-color: rgb(221, 22, 22);
+    margin: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 5%;    
+}
+.si{
+    background-color: rgb(7, 150, 7);
+    margin: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 10%;
+    padding: 0.8rem;   
+}
+.no{
+    background-color: rgb(221, 22, 22);
+    margin: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 10%;
+    padding: 0.8rem;    
+}
+
+/*header input:checked ~ .navbar{
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+header input:checked ~ label::before{
+    content: '\f00d';
+}*/
+
+/*.collapse {
+    &:not(.show) {
+      display: none;
+    }
+  }
+
+  $transition-collapse:         height .35s ease;
+  $transition-collapse-width:   width .35s ease;
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    @include transition($transition-collapse);
+  
+    &.collapse-horizontal {
+      width: 0;
+      height: auto;
+      @include transition($transition-collapse-width);
+    }
+  }*/

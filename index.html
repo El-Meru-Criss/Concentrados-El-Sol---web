@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="./fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./personalizados/css/login.css">
+    <link rel="icon" type="image/x-icon" href="./logo1_t.png">
+
+</head>
+<body>
+    <section class="h-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+              <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                  <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+      
+                      <div class="text-center">
+                        
+                        <h4 class="mt-1 mb-5 pb-1">Concentrados El Sol</h4>
+                      </div>
+      
+                      <form>
+                        <p>Formulario de Ingreso</p>
+      
+                        <div class="form-outline mb-4">
+                          <input type="email" id="usuario" class="form-control"
+                            placeholder="Numero de Cedula" />
+                          <label class="form-label" for="usuario">Usuario</label>
+                        </div>
+      
+                        <div class="form-outline mb-4">
+                          <input type="password" id="contraseña" placeholder="Contraseña" class="form-control" />
+                          <label class="form-label" for="contraseña">Contraseña</label>
+                        </div>
+      
+                        <div class="text-center pt-1 mb-5 pb-1">
+                          <button onclick="registro()" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Ingresar</button>
+                        </div>
+                        
+                        <!--  <button onclick="Prueba()" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Prueba</button> -->
+      
+                      </form>
+      
+                    </div>
+                  </div>
+                  <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                    <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                      <center>
+                        <img src="./logo1_t.png" alt="" style="width: 5rem; float: right;; filter: grayscale(100%) brightness(200%);">
+                      </center>
+                      
+                      <h4 class="mb-4">Sistema de gestion de Concentrados El Sol</h4>
+                      <p class="small mb-0">El acceso está autorizado únicamente para administradores y trabajadores de Concentrados El Sol. 
+                        El ingreso no autorizado o indebido puede ser sancionado según la ley vigente. 
+                        Si necesita acceder al sistema, debe solicitarlo el acceso a uno de los administradores de la organización.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+    <script src="./personalizados/js/sesion.js"></script>
+    <script src="./sweetalert2-11.7.3/package/dist/sweetalert2.all.min.js"></script>
+    <script src="bootstrap-5.3.0-alpha3-dist/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.6.0.min.js"></script>
+</html>

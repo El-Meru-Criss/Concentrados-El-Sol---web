@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="./personalizados/css/estilos.css">   
+    <link rel="stylesheet" href="./fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./personalizados/css/personalizado.css">
+    <title>Inventario</title>
+    
+    <link rel="icon" type="image/x-icon" href="./logo1_t.png">
+</head>
+<body onload="sesion(); tabla_inventario();">
+
+      <!-- navbar steven -->
+
+      <header>
+        <a href="#" class="logo">
+            <span>CONCENTRADOS</span>elSol
+        </a>
+
+        <input type="checkbox" id="menu_bar">
+        <label for="menu_bar" class="fa fa-bars"></label>
+        <nav class="navbar">
+          <a style="color: var(--amarillo);" href="inventario.html">Inventario</a>
+          <a href="ventas.html">Ventas</a>
+          <a href="deudores.html">Deudores</a>
+          <a href="envios.html">Domicilios</a>
+          <div id="sesion">
+            <button onclick="mostrar_provedores()" type="button" class="btn btn-dark"><i class="fa-solid fa-user"></i> </button>
+          </div>
+        </nav>
+    </header>
+
+      <!-- Modals ocultos -->
+
+      <!-- general -->
+
+      <div class="modal fade" id="Modal_general" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+      </div>
+
+      <!-- Alertas -->
+      <div class="modal fade" id="buscar_producto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Alertas</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Aquí visualizamos los productos caducados, cerca de caducar o con poca existencia</p>
+              <hr>
+              <div class="mb-3" id="MostrarAlertas">
+                
+                <div class="input-group p-2">
+                  <span class="input-group-text col" id="basic-addon1">Nombre: </span>
+                  <button class="btn btn-danger col">Caducado</button>  
+                </div>
+
+                <div class="input-group p-2">
+                  <span class="input-group-text col" id="basic-addon1">Nombre: </span>
+                  <button class="btn btn-warning col">Caduca en 27 Dias</button>  
+                </div>
+
+                <div class="input-group p-2">
+                  <span class="input-group-text col" id="basic-addon1">Nombre: </span>
+                  <button class="btn btn-secondary col">Poca Existencia</button>  
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer align-content-center align-items-center justify-content-center text-center">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proveedores -->
+      <div class="modal fade" id="administrar_proovedores" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Administrar proveedores</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Aquí podrás ver, editar y crear proveedores!</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">nombre</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody id="lista_provedoores">
+                    <tr>
+                        <th>persona de ejemplo</th>
+                        <th>
+                            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                            <button type="button" class="btn btn-outline-info btn-sm"><i class="fa-solid fa-pen"></i></button>
+                        </th>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+                <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"><i class="fa-solid fa-circle-plus"></i> Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Crear Proveedor</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <p>¡Aquí podrás crear proveedores!</p>
+              
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Nombre: </span>
+                  <input type="text" class="form-control" id="Nombre_proveedor" placeholder="Nombre del proveedor" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Telefono: </span>
+                  <input type="text" class="form-control" id="Proveedor_telefono" placeholder="opcional!" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Cuenta Bancaria: </span>
+                  <input type="text" class="form-control" id="Proveedor_banco" placeholder="Tambien es opcional! :D" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              
+
+            </div>
+            <div class="modal-footer bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              <button class="btn btn-primary" onclick="crear_proveedor()" data-bs-target="#administrar_proovedores" data-bs-toggle="modal"> <i class="fa-solid fa-circle-plus"></i> Crear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Editar Proveedor</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="editar_proveedores">
+
+              <p>¡Aquí podrás editar información de proveedores!</p>
+              
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Nombre: </span>
+                  <input type="text" class="form-control" id="Nombre_proveedor" placeholder="Nombre del proveedor" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Telefono: </span>
+                  <input type="text" class="form-control" id="Proveedor_telefono" placeholder="opcional!" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Cuenta Bancaria: </span>
+                  <input type="text" class="form-control" id="Proveedor_banco" placeholder="Tambien es opcional! :D" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              
+
+            </div>
+            <div class="modal-footer bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              <button class="btn btn-primary" onclick="editar_proveedor()" data-bs-target="#administrar_proovedores" data-bs-toggle="modal"> <i class="fa-solid fa-pen-to-square"></i> Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Renovar Inventario -->
+      <div class="modal fade" id="Renovar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Renovar Productos</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Aquí podrás renovar los productos por medio de una lista!</p>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Proveedor:</span>
+                <select onchange="Refrescar_seleccion()" class="form-select" aria-label="Default select example" id="provedores_renovar">
+                  <option selected=""> </option>
+                </select>
+                <button type="button" onclick="provedores_renovar()" class="btn btn-outline-primary"><i class="fa-solid fa-rotate-right"></i></button>
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <select disabled class="form-select" aria-label="Default select example">
+                    <option selected="">Productos</option>
+                  </select>
+                  <input disabled type="number" class="form-control" id="basic-url" placeholder="Cantidad" aria-describedby="basic-addon3 basic-addon4">
+                  <input disabled type="number" class="form-control" id="basic-url" placeholder="Precio" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+                <div id="Renovar_productos"></div>
+                <button type="button" class="btn btn-outline-primary mt-1" onclick="Agregar_producto_renovar()"><i class="fa-solid fa-circle-plus"></i> </button>
+                <button onclick="eliminar_Productos_def()" type="button" class="btn btn-outline-danger mt-1"><i class="fa-solid fa-trash"></i> </button>
+              </div>
+
+              <div class="mb-3 align-content-center align-items-center justify-content-center text-center">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Total a consignar: </span>
+                  <input type="number" disabled class="form-control" value="0" id="renovar_valor_total" placeholder="Precio de compra" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+            </div>
+            <div class="modal-footer bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              
+              <div class="m-1">
+
+
+                <button onclick="Realizar_Pedido()" type="button" class="btn btn-outline-light"><i class="fa-solid fa-clipboard-list"></i> Terminar lista</button>
+                <button data-bs-dismiss="modal" onclick="pedidos_proveedores()" type="button" class="btn btn-primary"><i class="fa-solid fa-truck-fast"></i> Ver Pedidos</button>
+                
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- crear_productos -->
+      <div class="modal fade" id="crear_productos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Productos</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">Aquí podrás crear productos nuevos que tus proveedores proporcionen</p>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Nombre:</span>
+                  <input onchange="validar_nombre_producto()" type="text" class="form-control" id="producto_nombre" placeholder="Nombre del producto nuevo" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">Contenido:</span>
+                  <input min="0" type="number" class="form-control" id="peso_producto" placeholder="Cantidad/Peso[kg] del producto" aria-describedby="basic-addon3 basic-addon4">
+                  <button type="button" onclick="informacion_cantidad_productos()" class="btn btn-outline-primary"><i class="fa-solid fa-circle-question fa-lg"></i></button>
+                </div>
+
+              </div>
+
+              <div class="m-1 d-grid gap-2">
+
+                <button onclick="crear_producto()" type="button" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Crear</button>
+                
+              </div>
+
+              <hr>
+
+              <p class="text-center">Aquí podrás digitar el precio de un producto y su proveedor!</p>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Producto:</span>
+                <select class="form-select" id="seleccionar_producto" aria-label="Default select example">
+                  <option selected="">  </option>
+                </select>
+                <button type="button" onclick="seleccionar_producto()" class="btn btn-outline-primary"><i class="fa-solid fa-rotate-right"></i></button>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Proveeido por:</span>
+                <select class="form-select" id="proveedores_crear_producto" aria-label="Default select example">
+                  <option selected="">  </option>
+                </select>
+                <button type="button" onclick="mostrar_provedores_producto()" class="btn btn-outline-primary"><i class="fa-solid fa-rotate-right"></i></button>
+              </div>
+
+              <div class="mb-3">
+                
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">$</span>
+                  <input min="0" type="number" class="form-control" id="producto_precio" placeholder="Precio de compra" aria-describedby="basic-addon3 basic-addon4">
+                </div>
+
+              </div>
+
+              <div class="m-1 d-grid gap-2">
+
+                <button onclick="validar_asociacion_producto()" type="button" class="btn btn-primary"><i class="fa-solid fa-retweet"></i> Asociar</button>
+                
+              </div>
+
+            </div>
+            <div class="modal-footer bg-primary text-light align-content-center align-items-center justify-content-center text-center">
+              
+              <button onclick="mostrar_productos()" data-bs-dismiss="modal" type="button" class="btn btn-primary"><i class="fa-solid fa-box"></i> Ver productos</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- section del steven  -->
+
+      <section class="tablas">
+
+        <!-- Botones -->
+      <div id="Botones_Inventario" class="m-1 align-content-center align-items-center justify-content-center text-center">
+           
+      </div>      
+
+      <!-- contenido cambiante del inventario  -->
+
+      <div id="Contenido_inventario">
+
+        <H1>No hay informacion?</H1>
+        <h6>Algo ha pasado con la base de datos :l</h6>
+        
+      </div>
+
+      
+      </section>
+
+      
+
+      
+      
+      
+
+
+    <!-- Scripts, funcionalidades y JS -->
+    <script src="./personalizados/js/sesion.js"></script>
+    <script src="./personalizados/js/funciones.js"></script>
+    <script src="./sweetalert2-11.7.3/package/dist/sweetalert2.all.min.js"></script>
+    <script src="./bootstrap-5.3.0-alpha3-dist/js/bootstrap.min.js"></script>
+    <script src="./jquery-3.6.0.min.js"></script>
+</body>
+
+</html>
